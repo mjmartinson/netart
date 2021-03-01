@@ -23,14 +23,12 @@
         }
         function bgChange(e) {
             const rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
-            e.style.backgroundColor = rndCol;
-            console.log(e);
+            e.target.style.backgroundColor = rndCol;
         }
         for (let i = 0; i < 16; i++) {
             let div = document.createElement("div")
-            div.style.backgroundColor = 'blue';
+            div.style.backgroundColor = 'white';
             document.querySelector('body').appendChild(div);
-            console.log("hello" + i);
         }
         document.querySelector('body').addEventListener("mouseover", function(e) {
                 e.target.style.backgroundColor = bgChange(e);
