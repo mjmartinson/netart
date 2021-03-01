@@ -14,9 +14,6 @@
             flex-grow: 1;
             width: 25vw;
         }
-        body > div:hover {
-            transform: rotate(85deg);
-        }
     </style>
   </head>
   <body>
@@ -24,27 +21,19 @@
         function random(number) {
             return Math.floor(Math.random() * (number + 1));
         }
-        function bgChange(el) {
+        function bgChange(e) {
             const rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
-            el.style.backgroundColor = rndCol;
-            console.log(el);
+            e.style.backgroundColor = rndCol;
+            console.log(e);
         }
         for (let i = 0; i < 16; i++) {
             let div = document.createElement("div")
             div.style.backgroundColor = 'blue';
-            // div.addEventListener("mouseover", function (e) {
-            //     e.target.style.backgroundColor = bgChange(e);
-            // })
             document.querySelector('body').appendChild(div);
             console.log("hello" + i);
         }
         document.querySelector('body').addEventListener("mouseover", function(e) {
-                // e.target.style.backgroundColor = bgChange(e);
-                let divs = document.querySelectorAll('div')
-                console.log(divs);
-                for (let i = 0; i < divs.length; i++) {
-                    divs[i].style.backgroundColor = bgChange(divs[i]);
-                }
+                e.target.style.backgroundColor = bgChange(e);
         })
     </script>
   </body>
