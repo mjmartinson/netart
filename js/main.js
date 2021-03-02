@@ -13,8 +13,9 @@ function gen_random_divs(num) {
         div.style.left = `${randomNumber(left_border_width, window.innerWidth - left_border_width - 105)}px`;
         div.style.zIndex = `${randomNumber(0, 1000)}`;
         div.style.rotate = `${randomNumber(0, 360)}deg`;
-        div.style.width = `${window.innerHeight * 0.11}px`;
-        div.style.height = `${window.innerHeight * 0.11}px`;
+        div.style.width = `${window.innerHeight * 0.10}px`;
+        div.style.height = `${window.innerHeight * 0.10}px`;
+        console.log(window.innerHeight, window.innerWidth);
         div.style.backgroundColor = `rgb(${randomNumber(0, 255)},${randomNumber(0, 255)},${randomNumber(0, 255)})`;
         document.body.appendChild(div);
     }
