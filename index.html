@@ -1,38 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8"/>
-    <style>
-        body {
-            display: flex;
-            flex-wrap: wrap;
-            height: 100vh;
-            width: 100vw;
-            margin: 0;
-        }
-        body > div {
-            flex-grow: 1;
-            width: 25vw;
-        }
-    </style>
-  </head>
-  <body>
-    <script>
-        function random(number) {
-            return Math.floor(Math.random() * (number + 1));
-        }
-        function bgChange(e) {
-            const rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
-            e.target.style.backgroundColor = rndCol;
-        }
-        for (let i = 0; i < 16; i++) {
-            let div = document.createElement("div")
-            div.style.backgroundColor = 'white';
-            document.querySelector('body').appendChild(div);
-        }
-        document.querySelector('body').addEventListener("mouseover", function(e) {
-                e.target.style.backgroundColor = bgChange(e);
-        })
-    </script>
-  </body>
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/css/main.css">
+    <script src="/js/main.js" defer></script>
+</head>
+
+<body>
+    <button class="button" type="button" autofocus>Click Me!</button>
+    <div id="left"></div>
+    <div id="right"></div>
+    <div id="top"></div>
+    <div id="bottom"></div>
+</body>
+
 </html>
