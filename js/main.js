@@ -48,8 +48,6 @@ class Picture {
     createpicture() {
         dragElement(this.pic);
         this.pic.style.position = "absolute";
-        this.pic.style.minHeight = `${window.innerHeight * .15}px`;
-        this.pic.style.minWidth = `${window.innerWidth * .11}px`;
         this.pic.style.maxHeight = `${window.innerHeight * .40}px`;
         this.pic.style.maxWidth = `${window.innerWidth * .40}px`;
         this.picwidth = Math.floor(this.pic.naturalWidth * .40);
