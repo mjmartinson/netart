@@ -1,7 +1,6 @@
 function randomNumber(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
-
 async function get_imgs(file) {
     response = await (await fetch(`imgdata/${file}`)).text();
     srcs = response.split(',');
@@ -16,9 +15,7 @@ let allpics = [];
 get_imgs('nature.txt').then(srcs => {
     console.log(srcs, srcs.length);
     for (let i = 0; i < 100; i++) {
-        let ri = Math.floor(Math.random() * i);
-        console.log(ri);
-        let np = new Picture(srcs[ri], "");
+        let np = new Picture(srcs[i], "");
         allpics.push(np);
     }
 })
