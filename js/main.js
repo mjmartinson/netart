@@ -48,10 +48,12 @@ class Picture {
     createpicture() {
         dragElement(this.pic);
         this.pic.style.position = "absolute";
+        this.pic.style.minHeight = `${window.innerHeight * .15}px`;
+        this.pic.style.minWidth = `${window.innerWidth * .11}px`;
         this.pic.style.maxHeight = `${window.innerHeight * .40}px`;
         this.pic.style.maxWidth = `${window.innerWidth * .40}px`;
-        this.picwidth = Math.floor(this.pic.naturalWidth * .40);
-        this.picheight = Math.floor(this.pic.naturalHeight * .40);
+        this.picwidth = Math.floor(this.pic.naturalWidth);
+        this.picheight = Math.floor(this.pic.naturalHeight);
         this.pic.style.width = `${this.picwidth}px`;
         this.pic.style.height = `${this.picheight}px`;
         this.pic.style.top = `${randomNumber(top_border_width, window.innerHeight - top_border_width - this.picheight)}px`;
@@ -106,6 +108,7 @@ function dragElement(elmnt) {
     // get the mouse cursor position at startup:
     pos3 = e.clientX;
     pos4 = e.clientY;
+    elmnt.style.zIndex = thezindex;
     document.onmouseup = closeDragElement;
     // call a function whenever the cursor moves:
     document.onmousemove = elementDrag;
@@ -120,7 +123,6 @@ function dragElement(elmnt) {
     pos3 = e.clientX;
     pos4 = e.clientY;
     // set the element's new position:
-    elmnt.style.zIndex = thezindex;
     thezindex += 1;
     elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
     elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
