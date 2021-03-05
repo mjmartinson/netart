@@ -13,8 +13,7 @@ let thezindex = 0;
 let allpics = [];
 
 get_imgs('nature.txt').then(srcs => {
-    console.log(srcs, srcs.length);
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < srcs.length; i++) {
         let np = new Picture(srcs[i], "");
         allpics.push(np);
     }
@@ -27,7 +26,6 @@ document.querySelector('#shufflebutton').addEventListener("click", function(e) {
 
 document.querySelector('#uploadbutton').addEventListener("click", function(e) {
     let src = prompt("Enter the url to a photo you want to add:");
-    console.log(`Adding and caching new photo: ${src}`);
     if (src) {
         let newpic = new Picture(src, "");
         allpics.push(newpic);
