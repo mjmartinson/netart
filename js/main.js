@@ -7,36 +7,6 @@ async function get_imgs(file) {
     return srcs;
 }
 
-let left_border_width = document.querySelector("#left").clientWidth;
-let top_border_width = document.querySelector("#top").clientHeight;
-let thezindex = 0;
-let allpics = [];
-
-get_imgs('nature.txt').then(srcs => {
-    for (let i = 0; i < srcs.length; i++) {
-        let np = new Picture(srcs[i], "");
-        allpics.push(np);
-    }
-})
-
-// Add button click events
-document.querySelector('#shufflebutton').addEventListener("click", function(e) {
-    shuffle_pics();
-});
-
-document.querySelector('#removebutton').addEventListener("click", function(e) {
-    e.target.innerHTML = "Normal Mode";
-    removeMode();
-});
-
-document.querySelector('#uploadbutton').addEventListener("click", function(e) {
-    let src = prompt("Enter the url to a photo you want to add:");
-    if (src) {
-        let newpic = new Picture(src, "");
-        allpics.push(newpic);
-    }
-});
-
 class Picture {
     constructor(src, comment) {
         this.src = src;
@@ -79,6 +49,36 @@ class Picture {
         this.pic.style.border = `2px solid rgb(${randomNumber(0, 255)},${randomNumber(0, 255)},${randomNumber(0, 255)})`;
     }
 }
+
+let left_border_width = document.querySelector("#left").clientWidth;
+let top_border_width = document.querySelector("#top").clientHeight;
+let thezindex = 0;
+let allpics = [];
+
+get_imgs('nature.txt').then(srcs => {
+    for (let i = 0; i < srcs.length; i++) {
+        let np = new Picture(srcs[i], "");
+        allpics.push(np);
+    }
+})
+
+// Add button click events
+document.querySelector('#shufflebutton').addEventListener("click", function(e) {
+    shuffle_pics();
+});
+
+document.querySelector('#removebutton').addEventListener("click", function(e) {
+    e.target.innerHTML = "Normal Mode";
+    removeMode();
+});
+
+document.querySelector('#uploadbutton').addEventListener("click", function(e) {
+    let src = prompt("Enter the url to a photo you want to add:");
+    if (src) {
+        let newpic = new Picture(src, "");
+        allpics.push(newpic);
+    }
+});
 
 const fu = new FileUploader({
   maxSize: 1000,
