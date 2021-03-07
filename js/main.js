@@ -7,6 +7,49 @@ async function get_imgs(file) {
     return srcs;
 }
 
+class Picture {
+    constructor(src, comment) {
+        this.src = src;
+        this.comment = comment;
+        this.pic = document.createElement("img");
+        this.pic.className = 'pic';
+        this.pic.src = this.src;
+        this.pic.alt = this.comment;
+        this.pic.style.visibility = 'hidden';
+        this.pic.addEventListener("load", function () {this.style.visibility = 'visible'})
+        this.createpicture();
+    }
+
+    createpicture() {
+        dragElement(this.pic);
+        this.pic.style.position = "absolute";
+        this.pic.style.minHeight = `${window.innerHeight * .15}px`;
+        this.pic.style.minWidth = `${window.innerWidth * .11}px`;
+        this.pic.style.maxHeight = `${window.innerHeight * .30}px`;
+        this.pic.style.maxWidth = `${window.innerWidth * .30}px`;
+        this.picwidth = Math.floor(this.pic.naturalWidth * .5);
+        this.picheight = Math.floor(this.pic.naturalHeight * .5);
+        this.pic.style.width = `${this.picwidth}px`;
+        this.pic.style.height = `${this.picheight}px`;
+        this.pic.style.top = `${randomNumber(top_border_width, window.innerHeight - top_border_width - this.picheight)}px`;
+        this.pic.style.left = `${randomNumber(left_border_width, window.innerWidth - this.picwidth - left_border_width)}px`;
+        console.log(window.innerWidth, this.pic.style.left, this.picwidth);
+        this.pic.style.zIndex = thezindex;
+        thezindex += 1;
+        this.pic.style.rotate = `${randomNumber(-50, 50)}deg`;
+        this.pic.style.border = `2px solid rgb(${randomNumber(0, 255)},${randomNumber(0, 255)},${randomNumber(0, 255)})`;
+        document.body.appendChild(this.pic);
+    }
+
+    shuffle() {
+        this.pic.style.top = `${randomNumber(top_border_width, window.innerHeight - top_border_width - this.picheight)}px`;
+        this.pic.style.left = `${randomNumber(left_border_width, window.innerWidth - left_border_width - this.picwidth)}px`;
+        this.pic.style.zIndex = `${randomNumber(0, thezindex)}`;
+        this.pic.style.rotate = `${randomNumber(-50, 50)}deg`;
+        this.pic.style.border = `2px solid rgb(${randomNumber(0, 255)},${randomNumber(0, 255)},${randomNumber(0, 255)})`;
+    }
+}
+
 let left_border_width = document.querySelector("#left").clientWidth;
 let top_border_width = document.querySelector("#top").clientHeight;
 let thezindex = 0;
@@ -52,49 +95,6 @@ const fu = new FileUploader({
     console.error(err)
   }
 })
-
-class Picture {
-    constructor(src, comment) {
-        this.src = src;
-        this.comment = comment;
-        this.pic = document.createElement("img");
-        this.pic.className = 'pic';
-        this.pic.src = this.src;
-        this.pic.alt = this.comment;
-        this.pic.style.visibility = 'hidden';
-        this.pic.addEventListener("load", function () {this.style.visibility = 'visible'})
-        this.createpicture();
-    }
-
-    createpicture() {
-        dragElement(this.pic);
-        this.pic.style.position = "absolute";
-        this.pic.style.minHeight = `${window.innerHeight * .15}px`;
-        this.pic.style.minWidth = `${window.innerWidth * .11}px`;
-        this.pic.style.maxHeight = `${window.innerHeight * .30}px`;
-        this.pic.style.maxWidth = `${window.innerWidth * .30}px`;
-        this.picwidth = Math.floor(this.pic.naturalWidth * .5);
-        this.picheight = Math.floor(this.pic.naturalHeight * .5);
-        this.pic.style.width = `${this.picwidth}px`;
-        this.pic.style.height = `${this.picheight}px`;
-        this.pic.style.top = `${randomNumber(top_border_width, window.innerHeight - top_border_width - this.picheight)}px`;
-        this.pic.style.left = `${randomNumber(left_border_width, window.innerWidth - this.picwidth - left_border_width)}px`;
-        console.log(window.innerWidth, this.pic.style.left, this.picwidth);
-        this.pic.style.zIndex = thezindex;
-        thezindex += 1;
-        this.pic.style.rotate = `${randomNumber(-50, 50)}deg`;
-        this.pic.style.border = `2px solid rgb(${randomNumber(0, 255)},${randomNumber(0, 255)},${randomNumber(0, 255)})`;
-        document.body.appendChild(this.pic);
-    }
-
-    shuffle() {
-        this.pic.style.top = `${randomNumber(top_border_width, window.innerHeight - top_border_width - this.picheight)}px`;
-        this.pic.style.left = `${randomNumber(left_border_width, window.innerWidth - left_border_width - this.picwidth)}px`;
-        this.pic.style.zIndex = `${randomNumber(0, thezindex)}`;
-        this.pic.style.rotate = `${randomNumber(-50, 50)}deg`;
-        this.pic.style.border = `2px solid rgb(${randomNumber(0, 255)},${randomNumber(0, 255)},${randomNumber(0, 255)})`;
-    }
-}
 
 function dragElement(elmnt) {
   let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
