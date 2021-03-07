@@ -4,12 +4,17 @@
 <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="css/main.css">
+    <script src="node_modules/FileUploader/FileUploader.js"></script>
     <script src="js/main.js" defer></script>
 </head>
 
 <body>
-    <button class="button" id="shufflebutton" type="button" >Shuffle!</button>
-    <button class="button" id="uploadbutton" type="button" autofocus>Upload Photo!</button>
+    <section class="buttons">
+        <button class="button" id="filebutton" type="button">Upload Photo</button>
+        <button class="button" id="uploadbutton" type="button">Upload Url</button>
+        <button class="button" id="removebutton" type="button" autofocus>Remove Mode</button>
+        <button class="button" id="shufflebutton" type="button" autofocus>Shuffle!</button>
+    </section>
     <div id="left"></div>
     <div id="right"></div>
     <div id="top"></div>

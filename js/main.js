@@ -24,6 +24,11 @@ document.querySelector('#shufflebutton').addEventListener("click", function(e) {
     shuffle_pics();
 });
 
+document.querySelector('#removebutton').addEventListener("click", function(e) {
+    e.target.innerHTML = "Normal Mode";
+    removeMode();
+});
+
 document.querySelector('#uploadbutton').addEventListener("click", function(e) {
     let src = prompt("Enter the url to a photo you want to add:");
     if (src) {
@@ -31,6 +36,22 @@ document.querySelector('#uploadbutton').addEventListener("click", function(e) {
         allpics.push(newpic);
     }
 });
+
+const fu = new FileUploader({
+  maxSize: 1000,
+  types: ['image/jpeg', 'image/png'],
+  click: '#filebutton',
+  drop: 'body',
+  ready: (file) => {
+    console.log(`the data for the ${file.type} file called ${file.name} is ready`)
+    console.log(file)
+    let newpic = new Picture(file.data, "");
+    allpics.push(newpic);
+  },
+  error: (err) => {
+    console.error(err)
+  }
+})
 
 class Picture {
     constructor(src, comment) {
@@ -50,10 +71,10 @@ class Picture {
         this.pic.style.position = "absolute";
         this.pic.style.minHeight = `${window.innerHeight * .15}px`;
         this.pic.style.minWidth = `${window.innerWidth * .11}px`;
-        this.pic.style.maxHeight = `${window.innerHeight * .40}px`;
-        this.pic.style.maxWidth = `${window.innerWidth * .40}px`;
-        this.picwidth = Math.floor(this.pic.naturalWidth);
-        this.picheight = Math.floor(this.pic.naturalHeight);
+        this.pic.style.maxHeight = `${window.innerHeight * .30}px`;
+        this.pic.style.maxWidth = `${window.innerWidth * .30}px`;
+        this.picwidth = Math.floor(this.pic.naturalWidth * .5);
+        this.picheight = Math.floor(this.pic.naturalHeight * .5);
         this.pic.style.width = `${this.picwidth}px`;
         this.pic.style.height = `${this.picheight}px`;
         this.pic.style.top = `${randomNumber(top_border_width, window.innerHeight - top_border_width - this.picheight)}px`;
@@ -75,28 +96,6 @@ class Picture {
     }
 }
 
-// function gen_random_divs(num) {
-//     for (let i = 0; i < num; i++) {
-//         let div = document.createElement("div");
-//         let divwidth = window.innerHeight * 0.15;
-//         let divheight = window.innerHeight * 0.15;
-//         div.className = 'pic';
-//         div.style.position = "absolute";
-//         let left_border_width = document.querySelector("#left").clientWidth;
-//         let top_border_width = document.querySelector("#top").clientHeight;
-//         div.style.top = `${randomNumber(top_border_width, window.innerHeight - top_border_width - divheight)}px`;
-//         div.style.left = `${randomNumber(left_border_width, window.innerWidth - left_border_width - divwidth)}px`;
-//         div.style.zIndex = `${randomNumber(0, 1000)}`;
-//         div.style.rotate = `${randomNumber(0, 360)}deg`;
-//         div.style.width = `${divwidth}px`;
-//         div.style.height = `${divheight}px`;
-//         console.log(window.innerHeight, window.innerWidth);
-//         div.style.backgroundColor = `rgb(${randomNumber(0, 255)},${randomNumber(0, 255)},${randomNumber(0, 255)})`;
-//         dragElement(div);
-//         document.body.appendChild(div);
-//     }
-// }
-
 function dragElement(elmnt) {
   let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
 
@@ -109,6 +108,7 @@ function dragElement(elmnt) {
     pos3 = e.clientX;
     pos4 = e.clientY;
     elmnt.style.zIndex = thezindex;
+    thezindex += 1;
     document.onmouseup = closeDragElement;
     // call a function whenever the cursor moves:
     document.onmousemove = elementDrag;
@@ -123,7 +123,6 @@ function dragElement(elmnt) {
     pos3 = e.clientX;
     pos4 = e.clientY;
     // set the element's new position:
-    thezindex += 1;
     elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
     elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
   }
@@ -133,6 +132,20 @@ function dragElement(elmnt) {
     document.onmouseup = null;
     document.onmousemove = null;
   }
+}
+
+function removeMode() {
+  document.body.onmousedown = function(e) {
+    document.body.removeChild(e.target);
+  }
+  document.querySelector('#removebutton').addEventListener("click", function (e) {
+    e.target.innerHTML = "Remove Mode";
+    document.body.onmousedown = null;
+    document.querySelector('#removebutton').addEventListener("click", function (e) {
+      e.target.innerHTML = "Normal Mode";
+      removeMode();
+    })
+  });
 }
 
 function shuffle_pics() {
