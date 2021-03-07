@@ -37,22 +37,6 @@ document.querySelector('#uploadbutton').addEventListener("click", function(e) {
     }
 });
 
-const fu = new FileUploader({
-  maxSize: 1000,
-  types: ['image/jpeg', 'image/png'],
-  click: '#filebutton',
-  drop: 'body',
-  ready: (file) => {
-    console.log(`the data for the ${file.type} file called ${file.name} is ready`)
-    console.log(file)
-    let newpic = new Picture(file.data, "");
-    allpics.push(newpic);
-  },
-  error: (err) => {
-    console.error(err)
-  }
-})
-
 class Picture {
     constructor(src, comment) {
         this.src = src;
@@ -95,6 +79,22 @@ class Picture {
         this.pic.style.border = `2px solid rgb(${randomNumber(0, 255)},${randomNumber(0, 255)},${randomNumber(0, 255)})`;
     }
 }
+
+const fu = new FileUploader({
+  maxSize: 1000,
+  types: ['image/jpeg', 'image/png'],
+  click: '#filebutton',
+  drop: 'body',
+  ready: (file) => {
+    console.log(`the data for the ${file.type} file called ${file.name} is ready`)
+    console.log(file)
+    let newpic = new Picture(file.data, "");
+    allpics.push(newpic);
+  },
+  error: (err) => {
+    console.error(err)
+  }
+})
 
 function dragElement(elmnt) {
   let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
