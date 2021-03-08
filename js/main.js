@@ -17,6 +17,7 @@ class Picture {
         this.pic.alt = this.comment;
         this.pic.style.visibility = 'hidden';
         this.pic.addEventListener("load", function () {this.style.visibility = 'visible'})
+        this.pic.addEventListener("onmouseover", function () {this.style.cursor = 'grab'})
         this.createpicture();
     }
 
@@ -108,6 +109,7 @@ function dragElement(elmnt) {
     pos3 = e.clientX;
     pos4 = e.clientY;
     elmnt.style.zIndex = thezindex;
+    elmnt.style.cursor = "grabbing";
     thezindex += 1;
     document.onmouseup = closeDragElement;
     // call a function whenever the cursor moves:
