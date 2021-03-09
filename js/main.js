@@ -16,8 +16,8 @@ class Picture {
         this.pic.src = this.src;
         this.pic.alt = this.comment;
         this.pic.style.visibility = 'hidden';
-        this.pic.addEventListener("load", function () {this.style.visibility = 'visible'})
-        this.pic.addEventListener("onmouseover", function () {this.style.cursor = 'grab'})
+        this.pic.addEventListener("load", function (e) {e.target.style.visibility = 'visible'})
+        this.pic.onmouseover = function(e) {e.target.style.cursor = "grab"};
         this.createpicture();
     }
 
@@ -131,6 +131,7 @@ function dragElement(elmnt) {
 
   function closeDragElement() {
     // stop moving when mouse button is released:
+    elmnt.style.cursor = null;
     document.onmouseup = null;
     document.onmousemove = null;
   }
