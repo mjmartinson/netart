@@ -131,7 +131,7 @@ function dragElement(elmnt) {
 
   function closeDragElement() {
     // stop moving when mouse button is released:
-    elmnt.style.cursor = null;
+    elmnt.onmouseover = function(e) {e.target.style.cursor = "grab"};
     document.onmouseup = null;
     document.onmousemove = null;
   }
